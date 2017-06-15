@@ -181,7 +181,7 @@ class AreaPuCaWidget(PuCaWidget):
                 u'Chyba při provádění "{}".'.format(currentCheckAnalysisName))
 
     def _get_pu_area_max_quality_codes(self, layer, rowidColumnName):
-        """Returns PU area maximum quality codes.
+        """Returns the least accurate PU area quality codes.
         
         Args:
             layer (QgsVectorLayer): A reference to the active layer.
@@ -189,7 +189,7 @@ class AreaPuCaWidget(PuCaWidget):
         
         Returns:
             defaultdict: A defaultdict with rowids as keys (long)
-                and PU area maximum quality codes as values (float).
+                and the least accurate PU area quality codes as values (float).
         
         """
 
@@ -270,7 +270,7 @@ class AreaPuCaWidget(PuCaWidget):
         if selectedFeatureCount != 0 and vertexLayerFeatureCount != 0:
             parVertexLayerFilePath = processing.runalg(
                 'qgis:joinattributesbylocation',
-                layer, vertexLayer, u'touches', 0, 1, u'max', 0, None)['OUTPUT']
+                layer, vertexLayer, u'touches', 0, 1, u'max', 1, None)['OUTPUT']
             
             vertexLayerCode = vertexLayer.name().split('|')[1]
             
@@ -283,18 +283,18 @@ class AreaPuCaWidget(PuCaWidget):
     
     def _extract_pu_area_max_quality_codes(
             self, vertexLayer, puAreaMaxQualityCodes, rowidColumnName):
-        """Extracts PU area maximum quality codes.
+        """Extracts the least accurate PU area quality codes.
         
         Args:
             vertexLayer (QgsVectorLayer): A reference to the vertex layer.
             puAreaMaxQualityCodes (defaultdict): A defaultdict
                 with rowids as keys (long)
-                and PU area maximum quality codes as values (float).
+                and the least accurate PU area quality codes as values (float).
             rowidColumnName (str): A name of rowid column.
         
         Returns:
             defaultdict: A defaultdict with rowids as keys (long)
-                and PU area maximum quality codes as values (float).
+                and the least accurate PU area quality codes as values (float).
         
         """
         
@@ -325,26 +325,29 @@ class AreaPuCaWidget(PuCaWidget):
                 elif type(puAreaSobrSpolMaxQualityCode) == QPyNullVariant:
                     puAreaMaxQualityCode = puAreaBasisScaleMaxQualityCode
                 else:
-                    puAreaMaxQualityCode = max(puAreaSobrSpolMaxQualityCode,
-                                               puAreaBasisScaleMaxQualityCode)
+                    puAreaMaxQualityCode = self._get_pu_area_max_quality_code(
+                        puAreaSobrSpolMaxQualityCode,
+                        puAreaBasisScaleMaxQualityCode)
                 
-                if puAreaMaxQualityCode > puAreaMaxQualityCodes[rowid]:
-                    puAreaMaxQualityCodes[rowid] = puAreaMaxQualityCode
+                puAreaMaxQualityCodes[rowid] = \
+                    self._get_pu_area_max_quality_code(
+                        puAreaMaxQualityCode,
+                        puAreaMaxQualityCodes[rowid])
         
         return puAreaMaxQualityCodes
     
     def _get_pu_area_max_quality_code_from_basis_scale(self, puBasisScale):
-        """Returns a PU area max quality code.
+        """Returns the least accurate PU area quality code.
         
-        Returns a PU area max quality code calculated according to 
+        Returns the least accurate PU area quality code calculated according to
         the given PU basis scale.
         
         Args:
             puBasisScale (long): A PU basis scale value.
         
         Returns:
-            int: A PU area max quality code calculated according to 
-                the given PU basis scale.
+            int: The least accurate PU area quality code
+                calculated according to the given PU basis scale.
         
         """
         
@@ -357,6 +360,62 @@ class AreaPuCaWidget(PuCaWidget):
         
         return puAreaMaxQualityCode
     
+    def _get_pu_area_max_quality_code(
+            self, stPuAreaMaxQualityCode, ndPuAreaMaxQualityCode):
+        """Returns the least accurate PU area quality code.
+        
+        Args:
+            stPuAreaMaxQualityCode (float): A first PU area quality code.
+            ndPuAreaMaxQualityCode (float): A second PU area quality code.
+        
+        Returns:
+            float: The least accurate PU area quality code.
+        
+        """
+        
+        stCoorError = self._get_coor_error_from_pu_area_max_quality_code(
+            stPuAreaMaxQualityCode)
+        ndCoorError = self._get_coor_error_from_pu_area_max_quality_code(
+            ndPuAreaMaxQualityCode)
+        
+        if stCoorError > ndCoorError:
+            return stPuAreaMaxQualityCode
+        else:
+            return ndPuAreaMaxQualityCode
+    
+    def _get_coor_error_from_pu_area_max_quality_code(
+            self, puAreaMaxQualityCode):
+        """Returns a mean coordinate error.
+        
+        Returns a mean coordinate error according to
+        the least accurate PU area quality code.
+        
+        Args:
+            puAreaMaxQualityCode (float): The least accurate PU area
+                quality code.
+        
+        Returns:
+            float: A mean coordinate error.
+        
+        """
+        
+        if puAreaMaxQualityCode not in range(3, 9):
+            coorError = None
+        if puAreaMaxQualityCode == 3:
+            coorError = 0.14
+        elif puAreaMaxQualityCode == 4:
+            coorError = 0.26
+        elif puAreaMaxQualityCode == 5:
+            coorError = 0.50
+        elif puAreaMaxQualityCode == 6:
+            coorError = 0.21
+        elif puAreaMaxQualityCode == 7:
+            coorError = 0.42
+        elif puAreaMaxQualityCode == 8:
+            coorError = 1.00
+        
+        return coorError
+    
     def _get_pu_area_limit_deviation(
             self, sgiArea, spiArea, puAreaMaxQualityCode):
         """Returns PU area limit deviation.
@@ -364,7 +423,8 @@ class AreaPuCaWidget(PuCaWidget):
         Args:
             sgiArea (int): A SGI area.
             spiArea (int): A SPI area.
-            puAreaMaxQualityCode (float): A PU area maximum quality code.
+            puAreaMaxQualityCode (float): The least accurate PU area
+                quality code.
         
         Returns:
             float: A PU area limit deviation,
