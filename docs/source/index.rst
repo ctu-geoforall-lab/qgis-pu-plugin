@@ -17,6 +17,11 @@ Funkcionalitu zásuvného modulu lze rozdělit do tří částí:
 Případné nápady, připomínky a chyby prosím napište na `stránku zásuvného modulu
 <https://github.com/ctu-geoforall-lab/qgis-pu-plugin/issues>`__.
 
+.. note:: Vývoj pluginu původně započal v rámci diplomové práce
+          "Zásuvný modul QGIS pro zpracování přípravné fáze komplexních pozemkových úprav"
+          (`PDF
+          <https://github.com/ctu-geoforall-lab-projects/dp-svoboda-2017/raw/master/text/ondrej-svoboda-dp-2017.pdf>`__).
+
 .. toctree::
    :maxdepth: 2
 
