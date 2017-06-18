@@ -11,11 +11,11 @@ name=PU Plugin
 qgisMinimumVersion=2.16
 description=Plugin pro zpracování přípravné fáze pozemkových úprav.
 version=0.1
-author=Ondřej Svoboda
+author=Ondřej Svoboda (CTU GeoForAll Lab)
 email=svoboond@gmail.com
 
-tracker=https://github.com/ctu-geoforall-lab-projects/dp-svoboda-2017/issues
-repository=https://github.com/ctu-geoforall-lab-projects/dp-svoboda-2017
+tracker=https://github.com/ctu-geoforall-lab/qgis-pu-plugin/issues
+repository=https://github.com/ctu-geoforall-lab/qgis-pu-plugin
 # End of mandatory metadata
 
 # Recommended items:
@@ -26,7 +26,7 @@ repository=https://github.com/ctu-geoforall-lab-projects/dp-svoboda-2017
 # Tags are comma separated with spaces allowed
 tags=PU, pozemkove upravy, vfk
 
-homepage=https://github.com/ctu-geoforall-lab-projects/dp-svoboda-2017
+homepage=https://ctu-geoforall-lab.github.io/qgis-pu-plugin/
 category=Plugins
 icon=puplugin.png
 # experimental flag

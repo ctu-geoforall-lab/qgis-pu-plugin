@@ -15,7 +15,7 @@ Funkcionalitu zásuvného modulu lze rozdělit do tří částí:
     pro sestavení nárokových listů 
 
 Případné nápady, připomínky a chyby prosím napište na `stránku zásuvného modulu
-<https://github.com/ctu-geoforall-lab-projects/dp-svoboda-2017/issues>`__.
+<https://github.com/ctu-geoforall-lab/qgis-pu-plugin/issues>`__.
 
 .. toctree::
    :maxdepth: 2
