@@ -107,12 +107,14 @@ class DockWidget(QDockWidget):
         self.defaultMinorParNumberColumnName = 'PODDELENI_CISLA_PAR'
         self.deafultAreaColumnName = 'VYMERA_PARCELY'
         self.defaultNumberingColumnName = 'DRUH_CISLOVANI_PAR'
+        self.defaultPartColumnName = 'DIL_PARCELY'
         
         self.visibleDefaultColumns = (
             self.defaultMajorParNumberColumnName,
             self.defaultMinorParNumberColumnName,
             self.deafultAreaColumnName,
-            self.defaultNumberingColumnName)
+            self.defaultNumberingColumnName,
+            self.defaultPartColumnName)
         
         self.allVisibleColumns = \
             self.visiblePuColumns + self.visibleDefaultColumns

@@ -557,7 +557,7 @@
     <alias field="KMENOVE_CISLO_PAR" index="13" name="KMENOVE C. (PUV.)"/>
     <alias field="ZDPAZE_KOD" index="14" name=""/>
     <alias field="PODDELENI_CISLA_PAR" index="15" name="PODDELENI C. (PUV.)"/>
-    <alias field="DIL_PARCELY" index="16" name=""/>
+    <alias field="DIL_PARCELY" index="16" name="DIL"/>
     <alias field="MAPLIS_KOD" index="17" name=""/>
     <alias field="ZPURVY_KOD" index="18" name=""/>
     <alias field="DRUPOZ_KOD" index="19" name=""/>
@@ -627,6 +627,7 @@
       <column width="135" hidden="0" type="field" name="PU_KMENOVE_CISLO_PAR"/>
       <column width="140" hidden="0" type="field" name="PODDELENI_CISLA_PAR"/>
       <column width="140" hidden="0" type="field" name="PU_PODDELENI_CISLA_PAR"/>
+      <column width="50" hidden="0" type="field" name="DIL_PARCELY"/>
       <column width="95" hidden="0" type="field" name="PU_KATEGORIE"/>
       <column width="105" hidden="0" type="field" name="VYMERA_PARCELY"/>
       <column width="105" hidden="0" type="field" name="PU_VYMERA_PARCELY"/>
