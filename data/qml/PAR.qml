@@ -1,5 +1,5 @@
 <!DOCTYPE qgis PUBLIC 'http://mrcc.com/qgis.dtd' 'SYSTEM'>
-<qgis version="2.18.6" simplifyAlgorithm="0" minimumScale="0" maximumScale="1e+08" simplifyDrawingHints="1" minLabelScale="0" maxLabelScale="1e+08" simplifyDrawingTol="1" readOnly="0" simplifyMaxScale="1" hasScaleBasedVisibilityFlag="0" simplifyLocal="1" scaleBasedLabelVisibilityFlag="0">
+<qgis version="2.18.9" simplifyAlgorithm="0" minimumScale="0" maximumScale="1e+08" simplifyDrawingHints="1" minLabelScale="0" maxLabelScale="1e+08" simplifyDrawingTol="1" readOnly="0" simplifyMaxScale="1" hasScaleBasedVisibilityFlag="0" simplifyLocal="1" scaleBasedLabelVisibilityFlag="0">
   <edittypes>
     <edittype widgetv2type="Hidden" name="rowid">
       <widgetv2config fieldEditable="0" constraint="" labelOnTop="0" constraintDescription="" notNull="0"/>
@@ -553,7 +553,7 @@
     <alias field="PAR_TYPE" index="9" name=""/>
     <alias field="KATUZE_KOD" index="10" name=""/>
     <alias field="KATUZE_KOD_PUV" index="11" name=""/>
-    <alias field="DRUH_CISLOVANI_PAR" index="12" name=""/>
+    <alias field="DRUH_CISLOVANI_PAR" index="12" name="DRUH CISLOVANI"/>
     <alias field="KMENOVE_CISLO_PAR" index="13" name="KMENOVE C. (PUV.)"/>
     <alias field="ZDPAZE_KOD" index="14" name=""/>
     <alias field="PODDELENI_CISLA_PAR" index="15" name="PODDELENI C. (PUV.)"/>
@@ -604,7 +604,7 @@
       <column width="-1" hidden="1" type="field" name="PAR_TYPE"/>
       <column width="-1" hidden="1" type="field" name="KATUZE_KOD"/>
       <column width="-1" hidden="1" type="field" name="KATUZE_KOD_PUV"/>
-      <column width="-1" hidden="1" type="field" name="DRUH_CISLOVANI_PAR"/>
+      <column width="125" hidden="0" type="field" name="DRUH_CISLOVANI_PAR"/>
       <column width="-1" hidden="1" type="field" name="ZDPAZE_KOD"/>
       <column width="-1" hidden="1" type="field" name="DIL_PARCELY"/>
       <column width="-1" hidden="1" type="field" name="MAPLIS_KOD"/>
